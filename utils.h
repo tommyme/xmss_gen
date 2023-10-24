@@ -12,4 +12,5 @@ void ull_to_bytes(unsigned char *out, unsigned int outlen,
  */
 unsigned long long bytes_to_ull(const unsigned char *in, unsigned int inlen);
 
+void print_hex2(unsigned char *buf, int len);
 #endif

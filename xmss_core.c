@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-
+#include <stdio.h>
 #include "hash.h"
 #include "hash_address.h"
 #include "params.h"
@@ -246,6 +246,7 @@ int xmssmt_core_sign(const xmss_params *params,
     hash_message(params, mhash, sm + params->index_bytes, pub_root, idx,
                  sm + params->sig_bytes - params->padding_len - 3*params->n,
                  mlen);
+    print_hex2(mhash, params->n);
     sm += params->index_bytes + params->n;
 
     set_type(ots_addr, XMSS_ADDR_TYPE_OTS);

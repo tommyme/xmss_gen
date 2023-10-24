@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include "../utils.h"
 #include "../xmss.h"
 #include "../params.h"
 #include "../randombytes.h"
@@ -26,7 +26,7 @@
     #define XMSS_KEYPAIR xmss_keypair
     #define XMSS_SIGN xmss_sign
     #define XMSS_SIGN_OPEN xmss_sign_open
-    #define XMSS_VARIANT "XMSS-SHA2_10_256"
+    #define XMSS_VARIANT "XMSS-SHA2_20_256"
 #endif
 
 int main()
@@ -49,15 +49,18 @@ int main()
     unsigned long long mlen;
 
     randombytes(m, XMSS_MLEN);
-
+    printf("keypair...\n");
     XMSS_KEYPAIR(pk, sk, oid);
-
+    printf("length: %d, %lld\n", XMSS_OID_LEN + params.pk_bytes, XMSS_OID_LEN + params.sk_bytes);
+    print_hex2(pk, XMSS_OID_LEN + params.pk_bytes);
+    print_hex2(sk, XMSS_OID_LEN + params.sk_bytes);
     printf("Testing %d %s signatures.. \n", XMSS_SIGNATURES, XMSS_VARIANT);
 
-    for (i = 0; i < XMSS_SIGNATURES; i++) {
+    for (i = 0; i < 1; i++) {
         printf("  - iteration #%d:\n", i);
 
         XMSS_SIGN(sk, sm, &smlen, m, XMSS_MLEN);
+        print_hex2(sm, params.sig_bytes + XMSS_MLEN);
 
         if (smlen != params.sig_bytes + XMSS_MLEN) {
             printf("  X smlen incorrect [%llu != %u]!\n",

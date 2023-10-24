@@ -1,5 +1,5 @@
 #include "utils.h"
-
+#include <stdio.h>
 /**
  * Converts the value of 'in' to 'outlen' bytes in big-endian byte order.
  */
@@ -27,4 +27,11 @@ unsigned long long bytes_to_ull(const unsigned char *in, unsigned int inlen)
         retval |= ((unsigned long long)in[i]) << (8*(inlen - 1 - i));
     }
     return retval;
+}
+
+void print_hex2(unsigned char *buf, int len) {
+    for (int i = 0; i < len; i++) {
+        printf("%02x ", buf[i]);
+    }
+    printf("\n");
 }
