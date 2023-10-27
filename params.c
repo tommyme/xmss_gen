@@ -69,6 +69,9 @@ int xmss_str_to_oid(uint32_t *oid, const char *s)
     else if (!strcmp(s, "XMSS-SHAKE256_20_192")) {
         *oid = 0x00000015;
     }
+    else if (!strcmp(s, "XMSS-SM3_20_256")) {
+        *oid = 0x00000016;
+    }
     else {
         return -1;
     }
@@ -245,6 +248,9 @@ int xmssmt_str_to_oid(uint32_t *oid, const char *s)
     else if (!strcmp(s, "XMSSMT-SHAKE256_60/12_192")) {
         *oid = 0x00000038;
     }
+    else if (!strcmp(s, "XMSSMT-SM3_40/2_256")) {
+        *oid = 0x00000039;
+    }
     else {
         return -1;
     }
@@ -285,7 +291,9 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000015:
             params->func = XMSS_SHAKE256;
             break;
-
+        case 0x00000016:
+            params->func = XMSS_SM3;
+            break;
         default:
             return -1;
     }
@@ -312,6 +320,7 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000010:
         case 0x00000011:
         case 0x00000012:
+        case 0x00000016:
             params->n = 32;
             params->padding_len = 32;
             break;
@@ -358,6 +367,7 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x0000000f:
         case 0x00000012:
         case 0x00000015:
+        case 0x00000016:
             params->full_height = 20;
 
             break;
@@ -443,6 +453,9 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000038:
             params->func = XMSS_SHAKE256;
             break;
+        case 0x00000039:
+            params->func = XMSS_SM3;
+            break;
 
         default:
             return -1;
@@ -495,6 +508,7 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x0000002e:
         case 0x0000002f:
         case 0x00000030:
+        case 0x00000039:
             params->n = 32;
             params->padding_len = 32;
             break;
@@ -574,6 +588,7 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000033:
         case 0x00000034:
         case 0x00000035:
+        case 0x00000039:
             params->full_height = 40;
             break;
 
@@ -625,6 +640,7 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x0000002b:
         case 0x00000031:
         case 0x00000033:
+        case 0x00000039:
             params->d = 2;
             break;
 

@@ -7,6 +7,7 @@
 #define XMSS_SHA2 0
 #define XMSS_SHAKE128 1
 #define XMSS_SHAKE256 2
+#define XMSS_SM3      3
 
 /* This is a result of the OID definitions in the draft; needed for parsing. */
 #define XMSS_OID_LEN 4

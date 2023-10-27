@@ -19,14 +19,17 @@
     #define XMSS_KEYPAIR xmssmt_keypair
     #define XMSS_SIGN xmssmt_sign
     #define XMSS_SIGN_OPEN xmssmt_sign_open
-    #define XMSS_VARIANT "XMSSMT-SHA2_20/2_256"
+    // #define XMSS_VARIANT "XMSSMT-SHA2_40/2_256"
+    #define XMSS_VARIANT "XMSSMT-SHAKE_40/2_256"
 #else
     #define XMSS_PARSE_OID xmss_parse_oid
     #define XMSS_STR_TO_OID xmss_str_to_oid
     #define XMSS_KEYPAIR xmss_keypair
     #define XMSS_SIGN xmss_sign
     #define XMSS_SIGN_OPEN xmss_sign_open
-    #define XMSS_VARIANT "XMSS-SHA2_20_256"
+    // #define XMSS_VARIANT "XMSS-SHA2_20_256"
+    // #define XMSS_VARIANT "XMSS-SHAKE_20_256"
+    #define XMSS_VARIANT "XMSS-SM3_20_256"
 #endif
 
 int main()

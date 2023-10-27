@@ -7,6 +7,7 @@
 #include "params.h"
 #include "hash.h"
 #include "fips202.h"
+#include <openssl/evp.h>
 
 #define XMSS_HASH_PADDING_F 0
 #define XMSS_HASH_PADDING_H 1
@@ -20,6 +21,20 @@ void addr_to_bytes(unsigned char *bytes, const uint32_t addr[8])
     for (i = 0; i < 8; i++) {
         ull_to_bytes(bytes + i*4, 4, addr[i]);
     }
+}
+
+int sm3(const unsigned char *in, unsigned long long inlen, unsigned char *out) {
+    EVP_MD_CTX *mdctx;
+    mdctx = EVP_MD_CTX_new();
+    EVP_DigestInit_ex(mdctx, EVP_sm3(), NULL);
+    EVP_DigestUpdate(mdctx, in, inlen);
+
+    unsigned int md_len = 0;
+    EVP_DigestFinal_ex(mdctx, out, &md_len);
+
+    EVP_MD_CTX_free(mdctx);
+
+    return md_len;
 }
 
 static int core_hash(const xmss_params *params,
@@ -49,6 +64,9 @@ static int core_hash(const xmss_params *params,
     }
     else if (params->n == 64 && params->func == XMSS_SHAKE256) {
         shake256(out, 64, in, inlen);
+    }
+    else if (params->n == 32 && params->func == XMSS_SM3){
+        sm3(in, inlen, out);
     }
     else {
         return -1;
