@@ -15,3 +15,11 @@ For the SHA-2 hash functions (i.e. SHA-256 and SHA-512), we rely on OpenSSL. Mak
 ### License
 
 This reference implementation was written by Andreas Hülsing and Joost Rijneveld. All included code is available under the CC0 1.0 Universal Public Domain Dedication.
+
+
+### run
+
+```shell
+make clean && make test/xmss.exec var='-DKEYPAIRED -DXMSS_VARIANT=\"XMSS-SHAKE_20_256\"'
+make clean && make test/xmssmt.exec var='-DKEYPAIRED -DXMSS_VARIANT=\"XMSSMT-SHA2_40/2_256\"'
+```

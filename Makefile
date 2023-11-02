@@ -48,13 +48,13 @@ test/xmss_fast: test/xmss.c $(SOURCES_FAST) $(OBJS) $(HEADERS_FAST)
 	$(CC) -DXMSS_SIGNATURES=1024 $(CFLAGS) -o $@ $(SOURCES_FAST) $< $(LDLIBS)
 
 test/xmss: test/xmss.c $(SOURCES) $(OBJS) $(HEADERS)
-	$(CC) $(CFLAGS) -o $@ $(SOURCES) $< $(LDLIBS)
+	$(CC) $(var) $(CFLAGS) -o $@ $(SOURCES) $< $(LDLIBS)
 
 test/xmssmt_fast: test/xmss.c $(SOURCES_FAST) $(OBJS) $(HEADERS_FAST)
 	$(CC) -DXMSSMT -DXMSS_SIGNATURES=1024 $(CFLAGS) -o $@ $(SOURCES_FAST) $< $(LDLIBS)
 
 test/xmssmt: test/xmss.c $(SOURCES) $(OBJS) $(HEADERS)
-	$(CC) -DXMSSMT $(CFLAGS) -o $@ $(SOURCES) $< $(LDLIBS)
+	$(CC) -DXMSSMT $(var) $(CFLAGS) -o $@ $(SOURCES) $< $(LDLIBS)
 
 test/speed: test/speed.c $(SOURCES_FAST) $(OBJS) $(HEADERS_FAST)
 	$(CC) -DXMSSMT -DXMSS_VARIANT=\"XMSSMT-SHA2_20/2_256\" $(CFLAGS) -o $@ $(SOURCES_FAST) $< $(LDLIBS)
