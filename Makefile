@@ -83,6 +83,9 @@ ui/xmss_%: ui/%.c $(SOURCES) $(OBJS) $(HEADERS)
 ui/xmssmt_%: ui/%.c $(SOURCES) $(OBJS) $(HEADERS)
 	$(CC) -DXMSSMT $(CFLAGS) -o $@ $(SOURCES) $< $(LDLIBS)
 
+dylib: $(SOURCES) $(OBJS) $(HEADERS)
+	$(CC) $(CFLAGS) -shared -o $(SOURCES) -fPIC $(LDLIBS)
+
 clean:
 	-$(RM) $(TESTS)
 	-$(RM) test/vectors
